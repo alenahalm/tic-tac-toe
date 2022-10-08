@@ -33,6 +33,7 @@ fun checkWin(field_i:Int, field_j:Int,i:Int, j:Int, matrix: Array<Array<Array<Ar
 
 fun main() {
     val sc = Scanner(System.`in`)
+    println("Enter size:")
     val size = sc.nextInt()
     val matrix = Array(size){Array(size){Array(size){Array(size){'☐'} }}}
     var y = 2
@@ -40,11 +41,13 @@ fun main() {
     var xo = 0
     while (true) {
         println("Enter coordinates or 's' to show the field:")
-        when (val input = sc.nextLine()) {
-            "show" -> printMatrix(matrix)
+        var input = sc.next()
+        when (input) {
+            "s" -> printMatrix(matrix)
             else -> {
-                val i = input.split(" ")[0].toInt()
-                val j = input.split(" ")[1].toInt()
+                val i = input.toInt()
+                input = sc.next()
+                val j = input.toInt()
                 if (xo % 2 == 0) {
                     matrix[y-1][i-1][x-1][j-1] = '☒'
                     if (checkWin(y, x, i, j, matrix)) {
@@ -66,6 +69,5 @@ fun main() {
                 x = j
             }
         }
-
     }
 }
